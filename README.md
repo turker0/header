@@ -1,6 +1,6 @@
 # react-native-header
 
-A header library for react-native.  Uses power of reanimated2.
+A header library for react-native. Uses power of reanimated2.
 
 ## Installation
 
@@ -11,11 +11,29 @@ npm install react-native-header
 ## Usage
 
 ```js
-import Header from "react-native-header";
+import Header from 'react-native-header';
 
 // ...
 
-const result = await Header.multiply(3, 7);
+<Header
+  title="Example Header 01"
+  type={{
+    left: 'back',
+    right: 'close',
+  }}
+  callback={{
+    onLeft: () => {
+      console.log('onLeft');
+    },
+  }}
+  size={{
+    left: 20,
+    right: 20,
+    center: 24,
+  }}
+/>;
+
+// ...
 ```
 
 ## Contributing
