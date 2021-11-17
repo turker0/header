@@ -1,5 +1,9 @@
-export default {
-  multiply(a: number, b: number) {
-    return Promise.resolve(a * b);
-  },
-};
+export { default as Header } from './components/Header';
+export type {
+  Callback,
+  HeaderStyle,
+  HeaderType,
+  LeftType,
+  RightType,
+  Size,
+} from './types';
