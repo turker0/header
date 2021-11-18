@@ -1,4 +1,4 @@
-import type { ViewStyle } from 'react-native';
+import type { TextStyle, ViewStyle } from 'react-native';
 
 /**
  * JSDOC
@@ -8,6 +8,7 @@ export interface HeaderStyle {
   rightStyle?: ViewStyle;
   centerStyle?: ViewStyle;
   wrapperStyle?: ViewStyle;
+  titleStyle?: TextStyle;
 }
 
 export interface HeaderType {
