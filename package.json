@@ -1,5 +1,5 @@
 {
-  "name": "react-native-header",
+  "name": "@oguzturker8/header",
   "version": "0.1.0",
   "description": "A header library for react-native.  Uses power of reanimated2.",
   "main": "lib/commonjs/index",
@@ -44,6 +44,7 @@
   },
   "homepage": "https://github.com/oguzturker8/react-native-header#readme",
   "publishConfig": {
+    "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
