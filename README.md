@@ -5,7 +5,7 @@ A header library for react-native. Uses power of reanimated2.
 ## Installation
 
 ```sh
-npm install react-native-header
+npm install @oguzturker8/header
 ```
 
 ## Usage
