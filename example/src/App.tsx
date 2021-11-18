@@ -6,7 +6,7 @@ import {
   StackNavigationProp,
 } from '@react-navigation/stack';
 import * as React from 'react';
-import { Button, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View } from 'react-native';
 import { Header } from 'react-native-header';
 
 type screenNavigation = {
@@ -15,7 +15,7 @@ type screenNavigation = {
 
 function Screen1({ navigation }: screenNavigation) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={styles.container}>
       <Text>Screen1</Text>
       <Button
         title="Move to screen2"
@@ -27,7 +27,7 @@ function Screen1({ navigation }: screenNavigation) {
 
 function Screen2({ navigation }: screenNavigation) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={styles.container}>
       <Text>Screen2</Text>
       <Button
         title="Move to screen3"
@@ -39,7 +39,7 @@ function Screen2({ navigation }: screenNavigation) {
 
 function Screen3({ navigation }: screenNavigation) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={styles.container}>
       <Text>Screen3</Text>
       <Button
         title="Move to screen4"
@@ -51,7 +51,7 @@ function Screen3({ navigation }: screenNavigation) {
 
 function Screen4({ navigation }: screenNavigation) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={styles.container}>
       <Text>Screen4</Text>
       <Button title="Reset stack" onPress={() => navigation.popToTop()} />
     </View>
@@ -63,20 +63,57 @@ const Stack = createStackNavigator();
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator headerMode="screen">
         <Stack.Screen
           name="Screen1"
           component={Screen1}
           options={{
-            header: (props) => <Header {...props} title="deneme" />,
+            header: (props) => <Header {...props} title="Screen 01" />,
           }}
         />
-        <Stack.Screen name="Screen2" component={Screen2} />
-        <Stack.Screen name="Screen3" component={Screen3} />
-        <Stack.Screen name="Screen4" component={Screen4} />
+        <Stack.Screen
+          name="Screen2"
+          component={Screen2}
+          options={{
+            header: (props) => (
+              <Header {...props} title="Screen 02" type={{ right: 'back' }} />
+            ),
+          }}
+        />
+        <Stack.Screen
+          name="Screen3"
+          component={Screen3}
+          options={{
+            header: (props) => (
+              <Header
+                {...props}
+                title="Screen 03"
+                type={{ left: 'close', right: 'back' }}
+              />
+            ),
+          }}
+        />
+        <Stack.Screen
+          name="Screen4"
+          component={Screen4}
+          options={{
+            header: (props) => (
+              <Header {...props} title="Screen 04" type={{ right: 'close' }} />
+            ),
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
 export default App;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#e5e5e5',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
