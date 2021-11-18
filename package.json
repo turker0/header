@@ -70,7 +70,10 @@
   },
   "peerDependencies": {
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "@react-navigation/native": "^5.x",
+    "@react-navigation/stack": "^5.x",
+    "react-native-reanimated": "^2.x.x"
   },
   "jest": {
     "preset": "react-native",
@@ -151,9 +154,5 @@
       ]
     ]
   },
-  "dependencies": {
-    "@react-navigation/native": "^5.x",
-    "@react-navigation/stack": "^5.x",
-    "react-native-reanimated": "^2.2.4"
-  }
+  "dependencies": {}
 }
