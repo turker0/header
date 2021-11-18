@@ -151,6 +151,8 @@
     ]
   },
   "dependencies": {
+    "@react-navigation/native": "^5.x",
+    "@react-navigation/stack": "^5.x",
     "react-native-reanimated": "^2.2.4"
   }
 }
