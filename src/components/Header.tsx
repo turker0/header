@@ -1,10 +1,15 @@
 import React, { useMemo } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import type {
   Callback,
+  EdgeInsets,
   HeaderStyle,
   HeaderType,
+  ParamListBase,
+  Route,
+  Scene,
   Size,
+  StackNavigationProp,
 } from 'react-native-header';
 
 interface Props {
@@ -13,9 +18,22 @@ interface Props {
   type?: HeaderType;
   callback?: Callback;
   size?: Size;
+  navigation: StackNavigationProp<ParamListBase, string>;
+  insets: EdgeInsets;
+  previous?: Scene<Route<string, object | undefined>>;
+  // headerAnimatedValue?: Animated.Value;
 }
 
-const Header = ({ style, title, type, callback, size }: Props) => {
+const Header = ({
+  style,
+  title,
+  type,
+  callback,
+  size,
+  // navigation,
+  insets,
+}: // previous,
+Props) => {
   const LeftContent = useMemo(() => {
     switch (type?.left) {
       case 'back':
@@ -38,26 +56,28 @@ const Header = ({ style, title, type, callback, size }: Props) => {
     }
   }, [type?.right]);
   return (
-    <View style={[styles.container, style?.wrapperStyle]}>
-      <View style={[styles.leftContainer, style?.leftStyle]}>
-        <Pressable onPress={callback?.onLeft}>
-          <Text style={{ fontSize: size?.left }}>{LeftContent}</Text>
-        </Pressable>
-      </View>
-      <Pressable
-        onPress={callback?.onCenter}
-        style={[styles.centerContainer, style?.centerStyle]}
-      >
-        <View>
-          <Text style={{ fontSize: size?.center }}>{title}</Text>
+    <SafeAreaView style={{ paddingTop: insets.top }}>
+      <View style={[styles.container, style?.wrapperStyle]}>
+        <View style={[styles.leftContainer, style?.leftStyle]}>
+          <Pressable onPress={callback?.onLeft}>
+            <Text style={{ fontSize: size?.left }}>{LeftContent}</Text>
+          </Pressable>
         </View>
-      </Pressable>
-      <View style={[styles.rightContainer, style?.rightStyle]}>
-        <Pressable onPress={callback?.onRight}>
-          <Text style={{ fontSize: size?.right }}>{RightContent}</Text>
+        <Pressable
+          onPress={callback?.onCenter}
+          style={[styles.centerContainer, style?.centerStyle]}
+        >
+          <View>
+            <Text style={{ fontSize: size?.center }}>{title}</Text>
+          </View>
         </Pressable>
+        <View style={[styles.rightContainer, style?.rightStyle]}>
+          <Pressable onPress={callback?.onRight}>
+            <Text style={{ fontSize: size?.right }}>{RightContent}</Text>
+          </Pressable>
+        </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
