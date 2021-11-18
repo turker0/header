@@ -15,23 +15,20 @@ import Header from 'react-native-header';
 
 // ...
 
-<Header
-  title="Example Header 01"
-  type={{
-    left: 'back',
-    right: 'close',
-  }}
-  callback={{
-    onLeft: () => {
-      console.log('onLeft');
-    },
-  }}
-  size={{
-    left: 20,
-    right: 20,
-    center: 24,
-  }}
-/>;
+<NavigationContainer>
+  // ....
+  <Stack.Navigator>
+    // ...
+    <Stack.Screen
+      name="Screen1"
+      component={Screen1}
+      options={{
+        header: (props) => <Header {...props} title="deneme" />,
+      }}
+    />
+    // ...
+  </Stack.Navigator>
+</NavigationContainer>;
 
 // ...
 ```

@@ -30,3 +30,10 @@ export interface Size {
   right?: number;
   center?: number;
 }
+
+export interface EdgeInsets {
+  top: number;
+  right: number;
+  bottom: number;
+  left: number;
+}
