@@ -1,5 +1,5 @@
 {
-  "name": "react-native-header",
+  "name": "@oguzturker8/header",
   "version": "0.1.0",
   "description": "A header library for react-native.  Uses power of reanimated2.",
   "main": "lib/commonjs/index",
@@ -13,7 +13,7 @@
     "android",
     "ios",
     "cpp",
-    "react-native-header.podspec",
+    "@oguzturker8/header.podspec",
     "!lib/typescript/example",
     "!android/build",
     "!ios/build",
@@ -36,14 +36,15 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/oguzturker8/react-native-header",
+  "repository": "https://github.com/oguzturker8/header",
   "author": "oguzturker8 <oguzturker8@gmail.com> (https://github.com/oguzturker8)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/oguzturker8/react-native-header/issues"
+    "url": "https://github.com/oguzturker8/header/issues"
   },
-  "homepage": "https://github.com/oguzturker8/react-native-header#readme",
+  "homepage": "https://github.com/oguzturker8/header#readme",
   "publishConfig": {
+    "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
@@ -69,7 +70,10 @@
   },
   "peerDependencies": {
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "@react-navigation/native": "^5.x",
+    "@react-navigation/stack": "^5.x",
+    "react-native-reanimated": "^2.x.x"
   },
   "jest": {
     "preset": "react-native",
@@ -150,9 +154,5 @@
       ]
     ]
   },
-  "dependencies": {
-    "@react-navigation/native": "^5.x",
-    "@react-navigation/stack": "^5.x",
-    "react-native-reanimated": "^2.2.4"
-  }
+  "dependencies": {}
 }

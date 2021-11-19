@@ -1,28 +1,10 @@
 import React, { useMemo } from 'react';
 import { Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import type {
-  Callback,
-  EdgeInsets,
-  HeaderStyle,
-  HeaderType,
-  ParamListBase,
-  Route,
-  Scene,
-  Size,
-  StackNavigationProp,
-} from 'react-native-header';
-
-interface Props {
-  style?: HeaderStyle;
-  title?: string;
-  type?: HeaderType;
-  callback?: Callback;
-  size?: Size;
-  navigation: StackNavigationProp<ParamListBase, string>;
-  insets: EdgeInsets;
-  previous?: Scene<Route<string, object | undefined>>;
-  // headerAnimatedValue?: Animated.Value;
-}
+import Animated, {
+  interpolateColor,
+  useAnimatedStyle,
+} from 'react-native-reanimated';
+import type { HeaderProps } from '../index';
 
 const Header = ({
   style,
@@ -30,10 +12,12 @@ const Header = ({
   type,
   callback,
   size,
-  // navigation,
+  navigation,
   insets,
-}: // previous,
-Props) => {
+  previous,
+  animation,
+}: HeaderProps) => {
+  // Left config
   const LeftContent = useMemo(() => {
     switch (type?.left) {
       case 'back':
@@ -41,25 +25,71 @@ Props) => {
       case 'close':
         return 'X';
       default:
+        if (previous) return '<';
         return null;
     }
-  }, [type?.left]);
+  }, [previous, type?.left]);
 
+  const LeftCallback = useMemo(() => {
+    switch (type?.left) {
+      case 'back':
+        return navigation.goBack;
+      case 'close':
+        return navigation.popToTop;
+      default:
+        if (previous) return navigation.goBack;
+        return null;
+    }
+  }, [navigation.goBack, navigation.popToTop, previous, type?.left]);
+
+  // Right config
   const RightContent = useMemo(() => {
     switch (type?.right) {
       case 'back':
-        return '>';
+        return '<';
       case 'close':
         return 'X';
       default:
+        if (previous) return 'X';
         return null;
     }
-  }, [type?.right]);
+  }, [previous, type?.right]);
+
+  const RightCallback = useMemo(() => {
+    switch (type?.right) {
+      case 'back':
+        return navigation.goBack;
+      case 'close':
+        return navigation.popToTop;
+      default:
+        if (previous) return navigation.popToTop;
+        return null;
+    }
+  }, [navigation.goBack, navigation.popToTop, previous, type?.right]);
+
+  // Animated styles
+
+  const animatedStyle = useAnimatedStyle(() => {
+    const backgroundColor =
+      animation?.background?.slidingRange && animation?.background?.colorRange
+        ? interpolateColor(
+            animation?.animatedValue.value ?? 0,
+            animation?.background?.slidingRange ?? [0, 100],
+            animation?.background?.colorRange ?? ['blue', 'red']
+          )
+        : undefined;
+    return {
+      backgroundColor,
+    };
+  });
+
   return (
-    <SafeAreaView style={{ paddingTop: insets.top }}>
-      <View style={[styles.container, style?.wrapperStyle]}>
+    <SafeAreaView style={[{ paddingTop: insets.top }]}>
+      <Animated.View
+        style={[styles.container, style?.wrapperStyle, animatedStyle]}
+      >
         <View style={[styles.leftContainer, style?.leftStyle]}>
-          <Pressable onPress={callback?.onLeft}>
+          <Pressable onPress={LeftCallback}>
             <Text style={{ fontSize: size?.left }}>{LeftContent}</Text>
           </Pressable>
         </View>
@@ -68,15 +98,20 @@ Props) => {
           style={[styles.centerContainer, style?.centerStyle]}
         >
           <View>
-            <Text style={{ fontSize: size?.center }}>{title}</Text>
+            <Text
+              style={[{ fontSize: size?.center }, style?.titleStyle]}
+              numberOfLines={1}
+            >
+              {title}
+            </Text>
           </View>
         </Pressable>
         <View style={[styles.rightContainer, style?.rightStyle]}>
-          <Pressable onPress={callback?.onRight}>
+          <Pressable onPress={RightCallback}>
             <Text style={{ fontSize: size?.right }}>{RightContent}</Text>
           </Pressable>
         </View>
-      </View>
+      </Animated.View>
     </SafeAreaView>
   );
 };
@@ -91,6 +126,8 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingHorizontal: 20,
     paddingVertical: 12,
+    borderBottomWidth: 0.5,
+    borderColor: '#ccc',
   },
   leftContainer: {
     minWidth: 32,
