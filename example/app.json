@@ -1,9 +1,9 @@
 {
-  "name": "@oguzturker8/header-example",
+  "name": "header-example",
   "displayName": "Header Example",
   "expo": {
-    "name": "@oguzturker8/header-example",
-    "slug": "@oguzturker8/header-example",
+    "name": "header-example",
+    "slug": "header-example",
     "description": "Example app for @oguzturker8/header",
     "privacy": "public",
     "version": "1.0.0",
