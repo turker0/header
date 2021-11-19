@@ -1,6 +1,6 @@
 {
   "name": "@oguzturker8/header",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "description": "A header library for react-native.  Uses power of reanimated2.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
