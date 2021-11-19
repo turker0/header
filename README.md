@@ -123,7 +123,7 @@ function Screen4({ navigation }: screenNavigation) {
 |   type    |                                                Decides left and right parts' types                                                 |                                      LeftType = 'back' - 'close' <br> RightType = 'back' - 'close'                                       |
 | callback  |                                                      Parts' onPress callbacks                                                      |                                  onLeft?: () => any <br> onRight?: () => any <br> onCenter?: () => any                                   |
 |   size    |                                                         Parts' text sizes                                                          |                                          left?: number <br> right?: number <br> center?: number                                          |
-| animation |                                                         Header animations                                                          |                                                        Described on below section                                                        |
+| animation |                                                         Header animations                                                          |                                                        Described below section                                                        |
 
 #### Animation
 
