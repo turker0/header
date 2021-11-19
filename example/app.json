@@ -1,22 +1,16 @@
 {
-  "name": "react-native-header-example",
+  "name": "@oguzturker8/header-example",
   "displayName": "Header Example",
   "expo": {
-    "name": "react-native-header-example",
-    "slug": "react-native-header-example",
-    "description": "Example app for react-native-header",
+    "name": "@oguzturker8/header-example",
+    "slug": "@oguzturker8/header-example",
+    "description": "Example app for @oguzturker8/header",
     "privacy": "public",
     "version": "1.0.0",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
+    "platforms": ["ios", "android", "web"],
     "ios": {
       "supportsTablet": true
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "assetBundlePatterns": ["**/*"]
   }
 }

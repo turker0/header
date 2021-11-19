@@ -1,5 +1,3 @@
-import React, { useMemo } from 'react';
-import { Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import type {
   Callback,
   EdgeInsets,
@@ -10,7 +8,9 @@ import type {
   Scene,
   Size,
   StackNavigationProp,
-} from 'react-native-header';
+} from '@oguzturker8/header';
+import React, { useMemo } from 'react';
+import { Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
 interface Props {
   style?: HeaderStyle;

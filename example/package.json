@@ -1,6 +1,6 @@
 {
-  "name": "react-native-header-example",
-  "description": "Example app for react-native-header",
+  "name": "@oguzturker8/header-example",
+  "description": "Example app for @oguzturker8/header",
   "version": "0.0.1",
   "private": true,
   "main": "index",

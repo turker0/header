@@ -1,5 +1,6 @@
 // In App.js in a new project
 
+import { Header } from '@oguzturker8/header';
 import { NavigationContainer, ParamListBase } from '@react-navigation/native';
 import {
   createStackNavigator,
@@ -7,7 +8,6 @@ import {
 } from '@react-navigation/stack';
 import * as React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
-import { Header } from 'react-native-header';
 
 type screenNavigation = {
   navigation: StackNavigationProp<ParamListBase, string>;

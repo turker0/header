@@ -1,17 +1,17 @@
-# react-native-header
+# @oguzturker8/header
 
 A header library for react-native. Uses power of reanimated2.
 
 ## Installation
 
 ```sh
-npm install react-native-header
+npm install @oguzturker8/header
 ```
 
 ## Usage
 
 ```js
-import Header from 'react-native-header';
+import Header from '@oguzturker8/header';
 
 // ...
 
