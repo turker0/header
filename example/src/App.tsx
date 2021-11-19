@@ -1,6 +1,10 @@
 // In App.js in a new project
 
-import { Header } from '@oguzturker8/header';
+import {
+  AnimatedScrollView,
+  Header,
+  useHeaderAnimation,
+} from '@oguzturker8/header';
 import { NavigationContainer, ParamListBase } from '@react-navigation/native';
 import {
   createStackNavigator,
@@ -50,11 +54,38 @@ function Screen3({ navigation }: screenNavigation) {
 }
 
 function Screen4({ navigation }: screenNavigation) {
+  const { scrollOffset, scrollHandler } = useHeaderAnimation();
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      header: (props) => (
+        <Header
+          {...props}
+          title="Screen 04"
+          type={{ right: 'close' }}
+          animation={{
+            animatedValue: scrollOffset,
+            background: {
+              colorRange: ['blue', 'red'],
+              slidingRange: [0, 100],
+            },
+          }}
+        />
+      ),
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navigation]);
+
   return (
-    <View style={styles.container}>
-      <Text>Screen4</Text>
-      <Button title="Reset stack" onPress={() => navigation.popToTop()} />
-    </View>
+    <AnimatedScrollView onScroll={scrollHandler}>
+      <View style={styles.container}>
+        <Text>Screen4</Text>
+        <Button title="Reset stack" onPress={() => navigation.popToTop()} />
+        <Text>Screen4</Text>
+        {Array.from({ length: 100 }, (_, i) => (
+          <Text key={i}>{`${i + 1}. Text`}</Text>
+        ))}
+      </View>
+    </AnimatedScrollView>
   );
 }
 
@@ -96,11 +127,12 @@ function App() {
         <Stack.Screen
           name="Screen4"
           component={Screen4}
-          options={{
-            header: (props) => (
-              <Header {...props} title="Screen 04" type={{ right: 'close' }} />
-            ),
-          }}
+          // Declare it in Screen Component
+          // options={{
+          //   header: (props) => (
+          //     <Header {...props} title="Screen 04" type={{ right: 'close' }} />
+          //   ),
+          // }}
         />
       </Stack.Navigator>
     </NavigationContainer>

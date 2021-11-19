@@ -1,28 +1,10 @@
-import type {
-  Callback,
-  EdgeInsets,
-  HeaderStyle,
-  HeaderType,
-  ParamListBase,
-  Route,
-  Scene,
-  Size,
-  StackNavigationProp,
-} from '@oguzturker8/header';
 import React, { useMemo } from 'react';
 import { Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
-
-interface Props {
-  style?: HeaderStyle;
-  title?: string;
-  type?: HeaderType;
-  callback?: Callback;
-  size?: Size;
-  navigation: StackNavigationProp<ParamListBase, string>;
-  insets: EdgeInsets;
-  previous?: Scene<Route<string, object | undefined>>;
-  // headerAnimatedValue?: Animated.Value;
-}
+import Animated, {
+  interpolateColor,
+  useAnimatedStyle,
+} from 'react-native-reanimated';
+import type { HeaderProps } from '../index';
 
 const Header = ({
   style,
@@ -33,7 +15,8 @@ const Header = ({
   navigation,
   insets,
   previous,
-}: Props) => {
+  animation,
+}: HeaderProps) => {
   // Left config
   const LeftContent = useMemo(() => {
     switch (type?.left) {
@@ -84,11 +67,27 @@ const Header = ({
     }
   }, [navigation.goBack, navigation.popToTop, previous, type?.right]);
 
-  // Functions
+  // Animated styles
+
+  const animatedStyle = useAnimatedStyle(() => {
+    const backgroundColor =
+      animation?.background?.slidingRange && animation?.background?.colorRange
+        ? interpolateColor(
+            animation?.animatedValue.value ?? 0,
+            animation?.background?.slidingRange ?? [0, 100],
+            animation?.background?.colorRange ?? ['blue', 'red']
+          )
+        : undefined;
+    return {
+      backgroundColor,
+    };
+  });
 
   return (
-    <SafeAreaView style={{ paddingTop: insets.top }}>
-      <View style={[styles.container, style?.wrapperStyle]}>
+    <SafeAreaView style={[{ paddingTop: insets.top }]}>
+      <Animated.View
+        style={[styles.container, style?.wrapperStyle, animatedStyle]}
+      >
         <View style={[styles.leftContainer, style?.leftStyle]}>
           <Pressable onPress={LeftCallback}>
             <Text style={{ fontSize: size?.left }}>{LeftContent}</Text>
@@ -112,7 +111,7 @@ const Header = ({
             <Text style={{ fontSize: size?.right }}>{RightContent}</Text>
           </Pressable>
         </View>
-      </View>
+      </Animated.View>
     </SafeAreaView>
   );
 };

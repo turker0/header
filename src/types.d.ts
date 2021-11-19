@@ -1,4 +1,5 @@
 import type { TextStyle, ViewStyle } from 'react-native';
+import type Animated from 'react-native-reanimated';
 
 /**
  * JSDOC
@@ -37,4 +38,36 @@ export interface EdgeInsets {
   right: number;
   bottom: number;
   left: number;
+}
+
+interface Header {
+  style?: HeaderStyle;
+  title?: string;
+  type?: HeaderType;
+  callback?: Callback;
+  size?: Size;
+  navigation: StackNavigationProp<ParamListBase, string>;
+  insets: EdgeInsets;
+  previous?: Scene<Route<string, object | undefined>>;
+  animation?: HeaderAnimation;
+}
+
+interface HeaderAnimation {
+  animatedValue: Animated.SharedValue<number>;
+  background?: BackgroundAnimation;
+}
+
+type BackgroundAnimation = {
+  colorRange: string[];
+  slidingRange: number[];
+};
+
+interface AnimatedScrollView extends Component<AnimateProps<ScrollViewProps>> {
+  children: ReactNode;
+  onScroll:
+    | ((event: NativeSyntheticEvent<NativeScrollEvent>) => void)
+    | Animated.Node<
+        ((event: NativeSyntheticEvent<NativeScrollEvent>) => void) | undefined
+      >
+    | undefined;
 }
